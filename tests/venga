@@ -1,0 +1,7 @@
+cd ../../ft_printf_new/
+
+make re
+
+cd tests
+
+gcc *.c -L. ../libftprintf.a && ./a.out
