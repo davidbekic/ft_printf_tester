@@ -8,4 +8,4 @@ make re
 
 cd ft_printf_tester-dbekic/
 
-gcc *.c -L. ../ft_printf_new/libftprintf.a && ./a.out
+gcc *.c -L. ../libftprintf.a && ./a.out
