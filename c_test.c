@@ -1,18 +1,18 @@
 #include "printf_tester.h"
+#include <signal.h>
 
 int	g_test_no;
 
-void sig_handler7(int signum)
+void sig_handler_c(int signum)
 {
 	printf(BYEL"%d: SIGSEG\n" CRESET, g_test_no);
 	exit(0);
 }
 
-
-void	i_test(void)
+void	c_test(void)
 {
-	char buffer1[BUFFER_SIZE];
-	char buffer2[BUFFER_SIZE];
+	char *buffer1;
+	char *buffer2;
 	int	n1;
 	int	n2;
 	int	ret1;
@@ -21,33 +21,33 @@ void	i_test(void)
 	int	fd2;
 	int	i;
 
-
-	printf(CYN"%%i\n");
-
+	printf(CYN"%%c\n");
 
 //////// TEST 1 /////////
 
-	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
+	buffer1 = NULL;
+	buffer2 = NULL;
 	i = 0;
+	g_test_no++;
+	signal(SIGSEGV, sig_handler_c);
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %i", 24);
+	ret1 = printf("%c", 42);
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %i", 24);
+	ret2 = ft_printf("%c", 42);
 	freopen ("/dev/tty", "a", stdout);
 
 	fd1 = open("expected_output.txt", O_RDWR);
 	fd2 = open("user_output.txt", O_RDWR);
+	if (buffer1 == NULL)
+		buffer1 = malloc(10001);
+	if (buffer2 == NULL)
+		buffer2 = malloc(10001);
 
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
+	n1 = read(fd1, buffer1, 10000);
+	n2 = read(fd2, buffer2, 10000);
 
 	if (strncmp(buffer1, buffer2, n1) == 0)
 		i++;
@@ -59,92 +59,96 @@ void	i_test(void)
 		printf(BRED"1: ERR  " CRESET);
 
 
+	free(buffer1);
+	free(buffer2);
+
 
 //////// TEST 2 /////////
 
 
 	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
+	signal(SIGSEGV, sig_handler_c);
 	i = 0;
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %i", -100);
+	ret1 = printf("char is: %c", '\t');
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %i", -100);
+	ret2 = ft_printf("char is: %c", '\t');
 	freopen ("/dev/tty", "a", stdout);
 
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
+	buffer1 = malloc(10000);
+	buffer2 = malloc(10000);
+
+	n1 = read(fd1, buffer1, 10000);
+	n2 = read(fd2, buffer2, 10000);
 
 	if (strncmp(buffer1, buffer2, n1) == 0)
 		i++;
 	if (ret1 == ret2)
 		i++;
 	if (i == 2)
-		printf(BGRN"2: OK  "CRESET);
+		printf(BGRN"2: OK  " CRESET);
 	if (i != 2)
-		printf(BRED"2: ERR  "CRESET);
+		printf(BRED"2: ERR  " CRESET);
 
+	free(buffer1);
+	free(buffer2);
 
 
 //////// TEST 3 /////////
 
 
 	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
+	signal(SIGSEGV, sig_handler_c);
 	i = 0;
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %i", INT_MAX);
+	ret1 = printf("%c%c%c%c", 126, 202, 48, 49);
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %i", INT_MAX);
+	ret2 = ft_printf("%c%c%c%c", 126, 202, 48, 49);
 	freopen ("/dev/tty", "a", stdout);
 
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
+	buffer1 = malloc(10000);
+	buffer2 = malloc(10000);
+
+	n1 = read(fd1, buffer1, 10000);
+	n2 = read(fd2, buffer2, 10000);
 
 	if (strncmp(buffer1, buffer2, n1) == 0)
 		i++;
 	if (ret1 == ret2)
 		i++;
 	if (i == 2)
-		printf(BGRN"3: OK  " CRESET);
+		printf(BGRN"3: OK\n" CRESET);
 	if (i != 2)
-		printf(BRED"3: ERR  " CRESET);
+		printf(BRED"3: ERR\n" CRESET);
+	exit(0);
+
 
 //////// TEST 4 /////////
 
 
 	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
+	signal(SIGSEGV, sig_handler_c);
 	i = 0;
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %i", INT_MAX - 1);
+	ret1 = printf("  %s %s ", "what", "");
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %i", INT_MAX - 1);
+	ret2 = ft_printf("  %s %s ", "what", "");
 	freopen ("/dev/tty", "a", stdout);
 
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
+	buffer1 = malloc(10000);
+	buffer2 = malloc(10000);
+
+	n1 = read(fd1, buffer1, 10000);
+	n2 = read(fd2, buffer2, 10000);
 
 	if (strncmp(buffer1, buffer2, n1) == 0)
 		i++;
@@ -153,41 +157,43 @@ void	i_test(void)
 	if (i == 2)
 		printf(BGRN"4: OK  " CRESET);
 	if (i != 2)
-		printf(BGRN"4: ERR  " CRESET);
-
-
+		printf(BRED"4: ERR  " CRESET);
+	free(buffer1);
+	free(buffer2);
 
 //////// TEST 5 /////////
 
 
 	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
+	signal(SIGSEGV, sig_handler_c);
 	i = 0;
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %i", INT_MIN);
+	ret1 = printf("Why is life so %s", "fun");
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %i", INT_MIN);
+	ret2 = ft_printf("Why is life so %s", "fun");
 	freopen ("/dev/tty", "a", stdout);
 
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
+	fd1 = open("expected_output.txt", O_RDWR);
+	fd2 = open("user_output.txt", O_RDWR);
+	buffer1 = malloc(10000);
+	buffer2 = malloc(10000);
+
+	n1 = read(fd1, buffer1, 10000);
+	n2 = read(fd2, buffer2, 10000);
 
 	if (strncmp(buffer1, buffer2, n1) == 0)
 		i++;
 	if (ret1 == ret2)
 		i++;
 	if (i == 2)
-		printf(BGRN"5: OK  \n" CRESET);
+		printf(BGRN"5: OK  " CRESET);
 	if (i != 2)
-		printf(BRED"5: ERR  \n" CRESET);
+		printf(BRED"5: ERR  " CRESET);
+	free(buffer1);
+	free(buffer2);
 
-	check_leaks();
-	exit(0);
+	exit(0); 
 }

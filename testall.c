@@ -29,32 +29,74 @@ int	main(void)
 		}
 		if (i == 101)
 			printf(BMAG"\n------------------------------------------------------------------\n");
-//		delay(2);
+		delay(SPEED / 10);
 		i++;
 	}
 
 	printf("\n\n\n");
 	printf(BHMAG"AVAILABLE TESTS:\n"CRESET);
-	printf(BWHT"- all\n- d\n- u\n- c\n- s\n- %%\n"CRESET);
+	printf(WHT"- all\n- d\n- u\n- c\n- s\n- %%\n- x\n- X\n- ptr\n- mix\n"CRESET);
 
 	printf(BHMAG"\nWhich part do you want to test?: "CRESET);
 	scanf("%s", test);
-	printf(BWHT"testing %s...\n"CRESET, test);
 
-	if (strncmp(test, "d", 1) == 0)
+	if (strncmp(test, "d", 5) == 0)
 	{
+	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
 		else
 			d_test();
 	}
-	if (strncmp(test, "i", 1) == 0)
-		i_test();
-	if (strncmp(test, "u", 1) == 0)
-		u_test();
-	if (strncmp(test, "all", 3) == 0)
+	else if (strncmp(test, "x", 5) == 0)
 	{
+	printf(BWHT"testing %s...\n"CRESET, test);
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			x_test();
+	}
+	else if (strncmp(test, "p", 5) == 0)
+	{
+	printf(BWHT"testing %s...\n"CRESET, test);
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			p_test();
+	}
+	else if (strncmp(test, "c", 5) == 0)
+	{
+	printf(BWHT"testing %s...\n"CRESET, test);
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			c_test();
+	}
+	else if (strncmp(test, "i", 5) == 0)
+	{
+	printf(BWHT"testing %s...\n"CRESET, test);
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			i_test();
+	}
+	else if (strncmp(test, "u", 5) == 0)
+	{
+	printf(BWHT"testing %s...\n"CRESET, test);
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			u_test();
+	}
+	else if (strncmp(test, "all", 5) == 0)
+	{
+	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -65,6 +107,11 @@ int	main(void)
 			wait(&status);
 		else	
 			s_test();
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else	
+			c_test();
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -80,21 +127,47 @@ int	main(void)
 			wait(&status);
 		else
 			percent_test();
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			x_test();
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			x2_test();
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			p_test();
+		pid = fork();
+		if (pid != 0)
+			wait(&status);
+		else
+			blend_test();
 	}
-	if (strncmp(test, "s", 1) == 0)
+	else if (strncmp(test, "s", 5) == 0)
 	{
+		printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(0);
 		else
 			s_test();
 	}
-	if (strncmp(test, "%", 1) == 0)
+	else if (strncmp(test, "%", 5) == 0)
+	{
+		printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(0);
 		else
 			percent_test();
+	}
+	else 
+		printf(BRED"BAD INPUT\n"CRESET);
 
 
 

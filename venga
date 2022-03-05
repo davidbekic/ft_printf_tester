@@ -1,7 +1,11 @@
-cd ../../ft_printf_new/
+#!/bin/bash
+
+
+cd ../
 
 make re
 
-cd tests
 
-gcc *.c -L. ../libftprintf.a && ./a.out
+cd ft_printf_tester-dbekic/
+
+gcc *.c -L. ../ft_printf_new/libftprintf.a && ./a.out
