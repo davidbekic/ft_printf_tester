@@ -6,7 +6,7 @@ Very simple tester for the mandatory part of ft_printf.
 - Does not check for already freed memory.
 
 ## How to run
-Clone repo into your ft_printf root directory and run command: 
+Clone repo into your ft_printf root directory, cd into this directory and run command: 
 ```
 ./venga
 ```
