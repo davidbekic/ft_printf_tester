@@ -2,6 +2,7 @@
 # define PRINTF_TESTER_H
 # define SPEED 50
 # define BUFFER_SIZE 6000
+# define TIME_OUT 3
 #include "ANSI-color-codes.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,6 +15,7 @@
 #include <time.h>
 #include <string.h>
 #include <fcntl.h>
+#include <signal.h>
 
 void	d_test(void);
 void	d_testit(int n);

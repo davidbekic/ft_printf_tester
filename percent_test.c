@@ -22,7 +22,7 @@ void	percent_test(void)
 	int	i;
 
 
-	printf(CYN"%%\n");
+	printf(UCYN"category %%\n"CRESET);
 
 
 //////// TEST 1 /////////

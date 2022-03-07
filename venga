@@ -3,7 +3,7 @@
 
 cd ../ft_printf
 
-#make re
+make re
 
 
 cd ../ft_printf_tester-dbekic/

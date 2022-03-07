@@ -21,7 +21,7 @@ void	blend_test(void)
 	int	fd2;
 	int	i;
 
-	printf(CYN"mix\n");
+	printf(UCYN"MIX MEGAPOL\n"CRESET);
 
 
 //////// TEST 1 /////////
@@ -56,9 +56,9 @@ void	blend_test(void)
 	if (ret1 == ret2)
 		i++;
 	if (i == 2)
-		printf(BGRN"1: OK  " CRESET);
+		printf(BGRN"1: OK\n" CRESET);
 	if (i != 2)
-		printf(BRED"1: ERR  " CRESET);
+		printf(BRED"1: ERR\n" CRESET);
 
 
 //	free(buffer1);

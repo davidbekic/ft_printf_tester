@@ -172,6 +172,14 @@ int	main(void)
 		else
 			s_test();
 	}
+	else if (strncmp(test, "X", 5) == 0)
+	{
+		pid = fork();
+		if (pid != 0)
+			wait(0);
+		else
+			x2_test();
+	}
 	else if (strncmp(test, "%", 5) == 0)
 	{
 		pid = fork();
