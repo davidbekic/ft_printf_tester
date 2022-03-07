@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-cd ../
+cd ../ft_printf
 
-make re
+#make re
 
 
-cd ft_printf_tester-dbekic/
+cd ../ft_printf_tester-dbekic/
 
-gcc *.c -L. ../libftprintf.a && ./a.out
+gcc *.c -L. ../ft_printf/libftprintf.a && ./a.out

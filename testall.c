@@ -11,27 +11,50 @@ int	main(void)
 	int		ret;
 
 	i = 0;
-	while (i < 200)
-	{
-		if (i % 1 == 0 && i != 99 && i != 101 && i != 100)
-			printf(CYNHB"  "CRESET);
-		if (i % 2 == 0 && i != 99 && i != 101 && i != 100)
-			printf(MAGHB"  "CRESET);
-		if (i == 20 || i == 40 || i == 60 || i == 80 || i == 100 || i == 120 || i == 140 || i == 160 || i == 180)
 			printf("\n");
-		if (i == 99)
-			printf(MAGHB"\n------------------------------------------------------------------\n"CRESET);
-		if (i == 100)
-		{
-			printf(BCYN"¡DBEKIC'S "CRESET);
+			delay(SPEED);
+			printf(CYNHB"                          "CRESET);
+			delay(SPEED);
+			printf(MAGHB"                          "CRESET);
+			delay(SPEED);
+			printf("\n");
+			delay(SPEED);
+			printf(MAGHB"                          "CRESET);
+			delay(SPEED);
+			printf(CYNHB"                          "CRESET);
+			delay(SPEED);
+			printf("\n");
+			delay(SPEED);
+			printf(MAGHB"   "CRESET);
+			delay(SPEED);
+			printf("                                              ");
+			delay(SPEED);
+			printf(CYNHB"   "CRESET);
+			printf("\n");
+			printf(CYNHB"   "CRESET);
+			printf(BCYN"   DBEKIC'S "CRESET);
 			printf(BHMAG"FT_PRINTF "CRESET);
-			printf(BCYN"MANDATORY PART TESTER!\n"CRESET);
-		}
-		if (i == 101)
-			printf(BMAG"\n------------------------------------------------------------------\n");
-		delay(SPEED / 10);
-		i++;
-	}
+			delay(SPEED);
+			printf(BCYN"MANDATORY PART TESTER   "CRESET);
+			printf(CYNHB"   "CRESET);
+			printf("\n");
+			printf(CYNHB"   "CRESET);
+			printf("                                              ");
+			delay(SPEED);
+			printf(CYNHB"   "CRESET);
+			delay(SPEED);
+			printf("\n");
+			delay(SPEED);
+			printf(CYNHB"                          "CRESET);
+			delay(SPEED);
+			printf(CYNHB"                          "CRESET);
+			delay(SPEED);
+			printf("\n");
+			delay(SPEED);
+			printf(MAGHB"                          "CRESET);
+			delay(SPEED);
+			printf(MAGHB"                          "CRESET);
+			delay(SPEED);
 
 	printf("\n\n\n");
 	printf(BHMAG"AVAILABLE TESTS:\n"CRESET);
@@ -42,7 +65,6 @@ int	main(void)
 
 	if (strncmp(test, "d", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -51,7 +73,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "x", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -60,7 +81,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "p", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -69,7 +89,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "c", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -78,7 +97,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "i", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -87,7 +105,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "u", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -96,7 +113,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "all", 5) == 0)
 	{
-	printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(&status);
@@ -150,7 +166,6 @@ int	main(void)
 	}
 	else if (strncmp(test, "s", 5) == 0)
 	{
-		printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(0);
@@ -159,12 +174,19 @@ int	main(void)
 	}
 	else if (strncmp(test, "%", 5) == 0)
 	{
-		printf(BWHT"testing %s...\n"CRESET, test);
 		pid = fork();
 		if (pid != 0)
 			wait(0);
 		else
 			percent_test();
+	}
+	else if (strncmp(test, "mix", 5) == 0)
+	{
+		pid = fork();
+		if (pid != 0)
+			wait(0);
+		else
+			blend_test();
 	}
 	else 
 		printf(BRED"BAD INPUT\n"CRESET);

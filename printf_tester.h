@@ -2,7 +2,6 @@
 # define PRINTF_TESTER_H
 # define SPEED 50
 # define BUFFER_SIZE 6000
-#include "../ft_printf_new/libft.h"
 #include "ANSI-color-codes.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,7 +16,9 @@
 #include <fcntl.h>
 
 void	d_test(void);
+void	d_testit(int n);
 void	x2_test(void);
+int		ft_printf(const char *format, ...);
 void	blend_test(void);
 void	p_test(void);
 void	x_test(void);

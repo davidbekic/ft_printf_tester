@@ -32,12 +32,11 @@ void	p_test(void)
 	i = 0;
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %p\n", (void *) LONG_MIN);
+	ret1 = printf("number is: %p\n", (void *) -512599);
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %p\n", (void *) LONG_MIN);
-//	ret2 = ft_printf("number is: %p", (void *) 18446744073709551615);
+	ret2 = ft_printf("number is: %p\n", (void *) -512599);
 	freopen ("/dev/tty", "a", stdout);
 
 	fd1 = open("expected_output.txt", O_RDWR);
@@ -58,7 +57,6 @@ void	p_test(void)
 		printf(BGRN"1: OK\n" CRESET);
 	if (i != 2)
 		printf(BRED"1: ERR\n" CRESET);
-
 
 	check_leaks();
 	exit(0);
