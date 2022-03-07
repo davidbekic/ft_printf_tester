@@ -6,4 +6,6 @@ Very simple tester for the mandatory part of ft_printf.
 - Does not check for leaks. Be especially careful with hexadecimal conversions.
 
 ## How to run
+```
 Run command ./venga
+```
