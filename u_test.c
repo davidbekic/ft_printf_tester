@@ -8,9 +8,9 @@ void sig_handler_u(int signum)
 	exit(0);
 }
 
-
-void	u_test(void)
+void	u_testit(int n)
 {
+
 	char buffer1[BUFFER_SIZE];
 	char buffer2[BUFFER_SIZE];
 	int	n1;
@@ -20,12 +20,6 @@ void	u_test(void)
 	int	fd1;
 	int	fd2;
 	int	i;
-
-
-	printf(CYN"%%u\n");
-
-
-//////// TEST 1 /////////
 
 	g_test_no++;
 	signal(SIGSEGV, sig_handler2);
@@ -54,140 +48,26 @@ void	u_test(void)
 	if (ret1 == ret2)
 		i++;
 	if (i == 2)
-		printf(BGRN"1: OK  " CRESET);
+		printf(BGRN"%d: OK  "CRESET, g_test_no);
 	if (i != 2)
-		printf(BRED"1: ERR  " CRESET);
+		printf(BRED"%d: ERR  "CRESET, g_test_no);
+}
 
+void	u_test(void)
+{
+	printf(CYN"%%u\n");
 
+	u_testit(24);
+	u_testit(INT_MAX);
+	u_testit(INT_MIN);
+	u_testit(-25);
+	u_testit(0);
+	u_testit(1);
+	u_testit(34059);
+	u_testit(24);
+	u_testit(24);
+	u_testit(24);
+	printf("\n");
 
-//////// TEST 2 /////////
-
-
-	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
-	i = 0;
-	delay(SPEED);
-	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %u", -100);
-	freopen ("/dev/tty", "a", stdout);
-
-	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %u", -100);
-	freopen ("/dev/tty", "a", stdout);
-
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
-
-	if (strncmp(buffer1, buffer2, n1) == 0)
-		i++;
-	if (ret1 == ret2)
-		i++;
-	if (i == 2)
-		printf(BGRN"2: OK  "CRESET);
-	if (i != 2)
-		printf(BRED"2: ERR  "CRESET);
-
-
-
-//////// TEST 3 /////////
-
-
-	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
-	i = 0;
-	delay(SPEED);
-	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %u", INT_MAX);
-	freopen ("/dev/tty", "a", stdout);
-
-	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %u", INT_MAX);
-	freopen ("/dev/tty", "a", stdout);
-
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
-
-	if (strncmp(buffer1, buffer2, n1) == 0)
-		i++;
-	if (ret1 == ret2)
-		i++;
-	if (i == 2)
-		printf(BGRN"3: OK  " CRESET);
-	if (i != 2)
-		printf(BRED"3: ERR  " CRESET);
-
-//////// TEST 4 /////////
-
-
-	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
-	i = 0;
-	delay(SPEED);
-	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %u", INT_MAX - 1);
-	freopen ("/dev/tty", "a", stdout);
-
-	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %u", INT_MAX - 1);
-	freopen ("/dev/tty", "a", stdout);
-
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
-
-	if (strncmp(buffer1, buffer2, n1) == 0)
-		i++;
-	if (ret1 == ret2)
-		i++;
-	if (i == 2)
-		printf(BGRN"4: OK  " CRESET);
-	if (i != 2)
-		printf(BGRN"4: ERR  " CRESET);
-
-
-
-//////// TEST 5 /////////
-
-
-	g_test_no++;
-	signal(SIGSEGV, sig_handler2);
-	i = 0;
-	delay(SPEED);
-	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %u", INT_MIN);
-	freopen ("/dev/tty", "a", stdout);
-
-	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %u", INT_MIN);
-	freopen ("/dev/tty", "a", stdout);
-
-	n1 = read(fd1, buffer1, BUFFER_SIZE);
-	n2 = read(fd2, buffer2, BUFFER_SIZE);
-	buffer1[n1] = 0;
-	buffer2[n2] = 0;
-	lseek(fd1, 0, SEEK_SET);
-	lseek(fd2, 0, SEEK_SET);
-
-	if (strncmp(buffer1, buffer2, n1) == 0)
-		i++;
-	if (ret1 == ret2)
-		i++;
-	if (i == 2)
-		printf(BGRN"5: OK  \n" CRESET);
-	if (i != 2)
-		printf(BRED"5: ERR  \n" CRESET);
-
-	check_leaks();
 	exit(0);
 }
