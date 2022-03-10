@@ -64,11 +64,11 @@ void	x2_testit(int n)
 	i = 0;
 	delay(SPEED);
 	freopen("expected_output.txt", "w", stdout);
-	ret1 = printf("number is: %x", 500);
+	ret1 = printf("number is: %x", n);
 	freopen ("/dev/tty", "a", stdout);
 
 	freopen("user_output.txt", "w", stdout);
-	ret2 = ft_printf("number is: %x", 500);
+	ret2 = ft_printf("number is: %x", n);
 	freopen ("/dev/tty", "a", stdout);
 
 	fd1 = open("expected_output.txt", O_RDWR);
