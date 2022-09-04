@@ -1,5 +1,5 @@
 # ft_printf_tester-dbekic
-Very simple tester for the mandatory part of ft_printf.
+Tester for the mandatory part of ft_printf.
 
 #### Current Flaws
 - Does not check for leaks. Be especially careful with hexadecimal conversions.
