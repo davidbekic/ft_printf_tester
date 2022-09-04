@@ -1,4 +1,4 @@
 cd ../
 make re
-cd ft_printf_tester-dbekic/
-gcc *.c -L. ../libftprintf.a && ./a.out
+cd -
+gcc src/*.c -L. ../libftprintf.a && ./a.out
