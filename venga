@@ -2,3 +2,4 @@ cd ../
 make re
 cd -
 gcc src/*.c -L. ../libftprintf.a && ./a.out
+rm user_output.txt expected_output.txt a.out
